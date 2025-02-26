@@ -69,12 +69,27 @@ public class AppUserController {
     }
     
     @GetMapping("/verify/{profileName}")
-    public Boolean getUserById(@PathVariable String profileName) {
+    public Boolean verifyProfileName(@PathVariable String profileName) {
         return appUserService.verifyProfileName(profileName);
     }
     
     @GetMapping("/{id}/location/{location}")
     public void getUserById(@PathVariable Integer id, @PathVariable String location) {
         appUserService.updateLocation(location, id);
+    }
+    
+    @GetMapping("/sendotp/{phone}")
+    public void sendOTP(@PathVariable String phone) {
+    	// TODO: SMS integration
+    }
+    
+    @GetMapping("/verifyotp/{otp}")
+    public Boolean verifyOTP(@PathVariable String otp) {
+    	return otp.equals("123456");
+    }
+    
+    @GetMapping("/phone/{phone}")
+    public AppUser getUserByPhone(@PathVariable String phone) {
+        return appUserService.getUserByPhone(phone);
     }
 }

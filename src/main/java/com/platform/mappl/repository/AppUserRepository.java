@@ -15,4 +15,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
 	@Modifying
 	@Query("update AppUser u set u.location = :location where u.id = :id")
 	int updateLocation(@Param("location") String location, @Param("id") Integer id);
+	
+	AppUser findByPhone(String phone);
 }

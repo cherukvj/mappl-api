@@ -30,7 +30,7 @@ public class AppUserService {
     }
 
     public AppUser saveUser(AppUser appUser) {
-        logger.info("Saving user: {}", appUser.getLoginId());
+        logger.info("Saving user: {}", appUser.getPhone());
         return appUserRepository.save(appUser);
     }
 
@@ -47,5 +47,10 @@ public class AppUserService {
     public void updateLocation(String location, int userId) {
         logger.info("Update location for user {}", userId);
         appUserRepository.updateLocation(location, userId);
+    }
+    
+    public AppUser getUserByPhone(String phone) {
+        logger.info("Fetching user with phone {}", phone);
+        return appUserRepository.findByPhone(phone);
     }
 }

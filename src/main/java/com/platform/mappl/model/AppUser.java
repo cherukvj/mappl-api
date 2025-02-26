@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -23,11 +24,6 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @NotBlank(message = "Login ID cannot be empty")
-    @Size(max = 255, message = "Login ID cannot exceed 255 characters")
-    @Column(name = "login_id", nullable = false)
-    private String loginId;
 
     @NotBlank(message = "First Name cannot be empty")
     @Column(name = "first_name", nullable = false)
@@ -46,24 +42,26 @@ public class AppUser {
     private String phone;
 
     @Email(message = "Email should be valid")
-    @NotBlank(message = "Email cannot be empty")
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
     
-    @NotBlank(message = "DOB cannot be empty")
+    @NotNull(message = "Date Of Birth cannot be empty")
     @Column(name = "dob", nullable = false)
     private Date dob;
 
-    @Column(name = "age", nullable = false)
+    @Column(name = "age")
     private int age;
     
-    @NotBlank(message = "Height cannot be empty")
+    @NotNull(message = "Height cannot be empty")
     @Column(name = "height", nullable = false)
     private int height;
     
-    @NotBlank(message = "Hearts cannot be empty")
+    @NotNull(message = "Hearts cannot be empty")
     @Column(name = "hearts", nullable = false)
     private int hearts;
+    
+    @Column(name = "acquired_hearts")
+    private int acquiredHearts;
 
     @NotBlank(message = "Gender cannot be empty")
     @Column(name = "gender", nullable = false)
@@ -87,14 +85,6 @@ public class AppUser {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getLoginId() {
-		return loginId;
-	}
-
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
 	}
 
 	public String getFirstName() {
@@ -175,6 +165,14 @@ public class AppUser {
 
 	public void setHearts(int hearts) {
 		this.hearts = hearts;
+	}
+
+	public int getAcquiredHearts() {
+		return acquiredHearts;
+	}
+
+	public void setAcquiredHearts(int acquiredHearts) {
+		this.acquiredHearts = acquiredHearts;
 	}
 
 	public String getMaritalStatus() {
